@@ -1,10 +1,10 @@
-# Composer installer
-composer-setup.php
-
-# IDEs
+# IDE
 .vscode/
 .idea/
 
-# Sistema operacional
+# OS
 .DS_Store
 Thumbs.db
+
+# Composer installer
+composer-setup.php

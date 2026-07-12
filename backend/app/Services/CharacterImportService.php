@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Location;
 use App\Models\Episode;
 use App\Models\Character;
+use Illuminate\Support\Facades\DB;
 
 class CharacterImportService
 {
@@ -47,28 +48,33 @@ class CharacterImportService
         return $episodeIds;
     }
 
+
+
     public function importCharacter(array $characterData): void
     {
-        $originId = $this-> resolveLocation($characterData['origin']);
-        $currentLocationId = $this-> resolveLocation($characterData['location']);       
-    
-        $character = Character::updateOrCreate(
-            [
-                'api_id' => $characterData['id']                
-            ],
-            [   
-                'name' => $characterData['name'],
-                'status' => $characterData['status'],
-                'type' => $characterData['type'],
-                'species' => $characterData['species'],
-                'gender' => $characterData['gender'],
-                'origin_location_id' => $originId,
-                'current_location_id' => $currentLocationId,
-                'image' => $characterData['image']
-            ]
-        );     
-        
-        $episodeIds = $this->resolveEpisode($characterData['episode']);
-        $character->episodes()->sync($episodeIds);
+        DB::transaction(function ()use ($characterData) 
+        {
+                $originId = $this-> resolveLocation($characterData['origin']);
+                $currentLocationId = $this-> resolveLocation($characterData['location']);       
+            
+                $character = Character::updateOrCreate(
+                    [
+                        'api_id' => $characterData['id']                
+                    ],
+                    [   
+                        'name' => $characterData['name'],
+                        'status' => $characterData['status'],
+                        'type' => $characterData['type'],
+                        'species' => $characterData['species'],
+                        'gender' => $characterData['gender'],
+                        'origin_location_id' => $originId,
+                        'current_location_id' => $currentLocationId,
+                        'image' => $characterData['image']
+                    ]
+                );     
+                
+                $episodeIds = $this->resolveEpisode($characterData['episode']);
+                $character->episodes()->sync($episodeIds);
+        });
     }   
 }

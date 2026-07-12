@@ -1,0 +1,10 @@
+# Composer installer
+composer-setup.php
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

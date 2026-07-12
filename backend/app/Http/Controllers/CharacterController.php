@@ -8,9 +8,46 @@ use App\Models\Character;
 
 class CharacterController extends Controller
 {
-    public function index()
-    {        
-        $characters = Character::with(['originLocation', 'currentLocation'])->paginate(20);
+    public function index(Request $request)
+    {    
+        $query = Character::with(['originLocation', 'currentLocation']);
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->has('species')) {
+            $query->where('species', 'like', '%' . $request->species . '%');
+        }
+       
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->has('gender')) {
+            $query->where('gender', $request->gender);
+        }
+
+        if ($request->has('originLocation'))
+        {   
+            $origin = $request->originLocation;
+
+            $query->whereHas('originLocation', function ($q) use ($origin) {
+                $q->where('name', 'like', '%' . $origin . '%');
+            });
+        };
+
+        if ($request->has('currentLocation'))
+        {   
+            $location = $request->currentLocation;
+
+            $query->whereHas('currentLocation', function ($q) use ($location) {
+                $q->where('name', 'like', '%' . $location . '%');
+            });
+        };        
+
+        $characters = $query->paginate(20);
+
         return CharacterResource::collection($characters);
     }
 

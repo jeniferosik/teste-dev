@@ -4,15 +4,11 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\EpisodeResource;
 
 class CharacterResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+   public function toArray(Request $request): array
     {
         return [
             'api_id' => $this->api_id,
@@ -24,6 +20,7 @@ class CharacterResource extends JsonResource
             'image' => $this->image,
             'origin' => new LocationResource($this->originLocation),
             'current_location' => new LocationResource($this->currentLocation), 
+            'episodes' => EpisodeResource::collection($this->whenLoaded('episodes')),
         ];
     }
 }

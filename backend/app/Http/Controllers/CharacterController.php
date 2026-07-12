@@ -54,7 +54,7 @@ class CharacterController extends Controller
     public function show($api_id)
     {        
         $character = Character::where('api_id', $api_id)
-            ->with(['originLocation', 'currentLocation'])
+            ->with(['originLocation', 'currentLocation', 'episodes'])
             ->first();
 
         if ($character === null){            

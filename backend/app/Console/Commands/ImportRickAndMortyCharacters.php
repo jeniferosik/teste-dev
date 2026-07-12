@@ -21,7 +21,7 @@ class ImportRickAndMortyCharacters extends Command
         ImportCharactersPage::dispatch(1);
 
         for ($page = 2; $page <= $totalPages; $page++) { 
-            ImportCharactersPage::dispatch($page);
+            ImportCharactersPage::dispatch($page)->delay($page);
         }
     }
 }

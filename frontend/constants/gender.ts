@@ -4,5 +4,5 @@ export const GENDER_OPTIONS: Option[] = [
   { value: "Male", label: "Male" },
   { value: "Female", label: "Female" },
   { value: "Genderless", label: "Genderless" },
-  { value: "unknown", label: "unknown" },
+  { value: "unknown", label: "Unknown" },
 ]

@@ -22,17 +22,11 @@ export function usePortalAnimation() {
 
       cardEl.animate(
         [
-          { transform: "scale(1)", opacity: 1 },
-          { transform: "scale(0.5)", opacity: 0 },
+          { transform: "scale(1) rotate(0deg)", opacity: 1, filter: "blur(0px)" },
+          { transform: "scale(0.2) rotate(180deg)", opacity: 0, filter: "blur(6px)" },
         ],
-        { duration: 450, easing: "cubic-bezier(0.4,0,0.2,1)", fill: "forwards" },
+        { duration: 400, easing: "cubic-bezier(0.55,0.06,0.68,0.19)", fill: "forwards" },
       )
-
-      contentEl?.animate([{ opacity: 1 }, { opacity: 0 }], {
-        duration: 250,
-        easing: "ease",
-        fill: "forwards",
-      })
 
       const burstAnim = burstEl.animate(
         [

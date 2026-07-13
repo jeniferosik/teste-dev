@@ -16,7 +16,7 @@ const chewy = Chewy({
 })
 
 export const metadata: Metadata = {
-  title: 'Portal Browser — Rick and Morty',
+  title: 'The Multiverse Ledger — Rick and Morty',
   description:
     'Navegue pelos personagens do multiverso de Rick and Morty. Filtre por nome, espécie, status, gênero e localização.',
 }

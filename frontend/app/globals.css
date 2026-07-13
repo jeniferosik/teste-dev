@@ -1,26 +1,120 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import 'tailwindcss';
+@import 'tw-animate-css';
+/* Rick and Morty portal theme */
 
 @theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-chewy), ui-sans-serif, cursive;
+
+  /* Tokens shadcn mapeados para a paleta Rick and Morty (dark) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Paleta de UI Rick and Morty */
+  --color-portal: #99cd43;
+  --color-portal-dark: #328a42;
+  --color-cyan-accent: #00c2d9;
+  --color-rick-shirt: #faf074;
+  --color-morty-hair: #b7dbed;
+  --color-morty-shirt: #a3dddd;
+  --color-dead: #e84c4c;
+  --color-neutral-dim: #8b8b93;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  color-scheme: dark;
+  --radius: 0.75rem;
+
+  --background: #13163f;
+  --foreground: #b7dbed;
+
+  --card: #1b1f57;
+  --card-foreground: #b7dbed;
+
+  --popover: #1b1f57;
+  --popover-foreground: #b7dbed;
+
+  --primary: #99cd43;
+  --primary-foreground: #13163f;
+
+  --secondary: #232860;
+  --secondary-foreground: #b7dbed;
+
+  --muted: #232860;
+  --muted-foreground: #8b8b93;
+
+  --accent: #00c2d9;
+  --accent-foreground: #13163f;
+
+  --destructive: #e84c4c;
+  --destructive-foreground: #ffffff;
+
+  --border: #2c3170;
+  --input: #2c3170;
+  --ring: #99cd43;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Spinner do portal ─────────────────────────────────────────────
+   Base radial cheia + manchas radiais fora do centro sobrepostas.
+   Girar apenas uma base centralizada não produz movimento visível,
+   então as manchas descentralizadas dão o efeito de rotação. */
+.portal-spinner {
+  width: 80px;
+  height: 80px;
+  max-width: 40vw;
+  max-height: 40vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #fcfeb5 0%, #f5ea01 18%, transparent 45%),
+    radial-gradient(circle at 68% 62%, #d3dd45 0%, #60ae33 28%, transparent 58%),
+    radial-gradient(circle at 40% 75%, #5da535 0%, #479b38 30%, transparent 60%),
+    radial-gradient(circle, #2fad3a 0%, #479b38 40%, #188b3d 70%, #0d3f1f 88%, #13163f 100%);
+  box-shadow: 0 0 32px rgba(153, 205, 67, 0.45);
+  animation: portal-spin 0.15s linear infinite;
+}
+
+@keyframes portal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-spinner {
+    animation-duration: 1.2s;
+  }
 }

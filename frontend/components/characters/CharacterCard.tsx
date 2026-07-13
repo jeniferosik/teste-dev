@@ -2,6 +2,7 @@
 
 import { StatusBadge } from "@/components/ui/StatusBadge"
 import { PORTAL_COLORS } from "@/constants/colors"
+import { useImageRetry } from "@/hooks/useImageRetry"
 import { usePortalAnimation } from "@/hooks/usePortalAnimation"
 import type { Character } from "@/types/character"
 import Image from "next/image"
@@ -13,10 +14,14 @@ const BURST_GRADIENT = `radial-gradient(circle, ${PORTAL_COLORS.cream} 0%, ${POR
 export function CharacterCard({ character }: { character: Character }) {
   const router = useRouter()
   const { play } = usePortalAnimation()
+  const imgRetry = useImageRetry(character.image)
 
   const cardRef = useRef<HTMLAnchorElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const burstRef = useRef<HTMLSpanElement>(null)
+  const navigatingRef = useRef(false)
+
+  const href = `/characters/${character.api_id}`
 
   useEffect(() => {
     function resetAnimations() {
@@ -30,10 +35,6 @@ export function CharacterCard({ character }: { character: Character }) {
     window.addEventListener("pageshow", resetAnimations)
     return () => window.removeEventListener("pageshow", resetAnimations)
   }, [])
-
-  const navigatingRef = useRef(false)
-
-  const href = `/characters/${character.api_id}`
 
   async function handleClick(e: React.MouseEvent) {
     if (e.metaKey || e.ctrlKey || e.button === 1) return
@@ -77,11 +78,13 @@ export function CharacterCard({ character }: { character: Character }) {
         <div ref={contentRef} className="relative z-10 flex flex-col">
           <div className="relative aspect-square w-full overflow-hidden">
             <Image
-              src={character.image || "/placeholder.svg"}
+              key={imgRetry.key}
+              src={imgRetry.src}
               alt={character.name}
               fill
               sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 220px"
               className="object-cover transition-transform duration-300 group-hover:scale-105"
+              onError={imgRetry.onError}
             />
           </div>
           <div className="flex flex-col gap-2 p-3">
@@ -95,6 +98,6 @@ export function CharacterCard({ character }: { character: Character }) {
           </div>
         </div>
       </a>
-    </div >
+    </div>
   )
 }

@@ -48,7 +48,7 @@
   color-scheme: dark;
   --radius: 0.75rem;
 
-  --background: #13163f;
+  --background: #100f2c;
   --foreground: #b7dbed;
 
   --card: #1b1f57;
@@ -83,8 +83,15 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: var(--background);
+    background-image:
+      radial-gradient(800px circle at 15% 0%, rgba(0, 194, 217, 0.28), transparent 60%),
+      radial-gradient(850px circle at 100% 100%, rgba(250, 240, 116, 0.22), transparent 60%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
   }
+
 }
 
 /* ── Spinner do portal ─────────────────────────────────────────────

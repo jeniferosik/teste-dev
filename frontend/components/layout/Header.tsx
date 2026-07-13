@@ -4,14 +4,14 @@ import { Container } from "./Container"
 
 export function Header() {
   return (
-    <header className="border-b border-cyan-accent/30 bg-background">
-      <Container className="flex items-center gap-3 py-5">
+    <header className="border-b border-portal/30" style={{ backgroundColor: "rgba(0,194,217,0.7)" }}>
+      <Container className="flex items-center gap-3 py-6">
         <Link href="/characters" className="flex items-center gap-3 group">
           <div className="flex flex-col leading-none">
-            <span className="font-display text-2xl text-portal drop-shadow-[0_0_10px_rgba(153,205,67,0.35)]">
+            <span className="font-display text-4xl text-portal drop-shadow-[0_0_10px_rgba(153,205,67,0.35)]">
               The Multiverse Ledger
             </span>
-            <span className="text-xs text-cyan-accent/80">Personagens de Rick and Morty</span>
+            <span className="text-base" style={{ color: "#A3DDDD" }}>Personagens de Rick and Morty</span>
           </div>
         </Link>
       </Container>

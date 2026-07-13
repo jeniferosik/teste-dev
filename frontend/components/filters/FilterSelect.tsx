@@ -20,7 +20,7 @@ export function FilterSelect({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-xs font-semibold uppercase tracking-wide text-cyan-accent/90">
+      <label htmlFor={id} className="text-xs font-semibold uppercase tracking-wide text-white">
         {label}
       </label>
       <select

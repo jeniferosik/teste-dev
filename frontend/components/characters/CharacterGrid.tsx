@@ -4,9 +4,9 @@ import { CharacterCard } from "./CharacterCard"
 export function CharacterGrid({ characters }: { characters: Character[] }) {
   return (
     <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-      {characters.map((character) => (
+      {characters.map((character, index) => (
         <li key={character.api_id} className="min-h-full">
-          <CharacterCard character={character} />
+          <CharacterCard character={character} accentIndex={index} />
         </li>
       ))}
     </ul>

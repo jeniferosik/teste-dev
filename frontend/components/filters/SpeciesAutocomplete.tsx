@@ -31,7 +31,7 @@ export function SpeciesAutocomplete({
 
   return (
     <div className="relative flex flex-col gap-1.5">
-      <label htmlFor="filter-species" className="text-xs font-semibold uppercase tracking-wide text-cyan-accent/90">
+      <label htmlFor="filter-species" className="text-xs font-semibold uppercase tracking-wide text-white">
         Espécie
       </label>
       <input

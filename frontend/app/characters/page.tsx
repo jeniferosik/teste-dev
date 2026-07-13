@@ -37,7 +37,7 @@ export default async function CharactersPage({
 
           <section className="flex flex-col gap-6">
             <div className="flex items-baseline justify-between gap-4">
-              <h1 className="font-display text-3xl text-portal drop-shadow-[0_0_12px_rgba(153,205,67,0.3)]">
+              <h1 className="font-display text-[1.65rem] text-portal drop-shadow-[0_0_12px_rgba(153,205,67,0.3)]">
                 Personagens
               </h1>
               <p className="text-sm text-muted-foreground">

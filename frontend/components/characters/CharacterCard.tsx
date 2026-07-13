@@ -11,7 +11,15 @@ import { useEffect, useRef } from "react"
 
 const BURST_GRADIENT = `radial-gradient(circle, ${PORTAL_COLORS.cream} 0%, ${PORTAL_COLORS.brightLemon} 8%, ${PORTAL_COLORS.lemonLime} 22%, ${PORTAL_COLORS.brightFern} 42%, ${PORTAL_COLORS.jadeGreen} 60%, ${PORTAL_COLORS.mediumJungle} 76%, ${PORTAL_COLORS.forestGreen} 92%, transparent 100%)`
 
-export function CharacterCard({ character }: { character: Character }) {
+const CARD_ACCENTS = [
+  { border: "#99CD43" },
+  { border: "#328A42" },
+  { border: "#FAF074" },
+  { border: "#00C2D9" },
+  { border: "#A3DDDD" },
+]
+
+export function CharacterCard({ character, accentIndex = 0 }: { character: Character; accentIndex?: number }) {
   const router = useRouter()
   const { play } = usePortalAnimation()
   const imgRetry = useImageRetry(character.image)
@@ -22,6 +30,7 @@ export function CharacterCard({ character }: { character: Character }) {
   const navigatingRef = useRef(false)
 
   const href = `/characters/${character.api_id}`
+  const accent = CARD_ACCENTS[accentIndex % CARD_ACCENTS.length]
 
   useEffect(() => {
     function resetAnimations() {
@@ -67,13 +76,16 @@ export function CharacterCard({ character }: { character: Character }) {
         }}
       />
 
-
       <a ref={cardRef}
         href={href}
         onClick={handleClick}
         aria-label={`Abrir portal para ${character.name}`}
-        className="portal-card group relative z-20 block h-full w-full overflow-hidden rounded-2xl border border-border bg-card ring-2 ring-transparent transition-all duration-300 hover:ring-portal hover:shadow-[0_0_28px_rgba(153,205,67,0.45)] focus-visible:outline-none focus-visible:ring-portal"
-        style={{ willChange: "transform, opacity" }}
+        className="portal-card group relative z-20 block h-full w-full overflow-hidden rounded-2xl ring-2 ring-transparent transition-all duration-300 hover:ring-portal hover:shadow-[0_0_28px_rgba(153,205,67,0.45)] focus-visible:outline-none focus-visible:ring-portal"
+        style={{
+          willChange: "transform, opacity",
+          background: accent.bg,
+          border: `3px solid ${accent.border}`,
+        }}
       >
         <div ref={contentRef} className="relative z-10 flex flex-col">
           <div className="relative aspect-square w-full overflow-hidden">
@@ -98,6 +110,6 @@ export function CharacterCard({ character }: { character: Character }) {
           </div>
         </div>
       </a>
-    </div>
+    </div >
   )
 }

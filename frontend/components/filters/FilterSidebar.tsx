@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { FilterForm } from "./FilterForm"
 
 const PANEL_TITLE = (
-  <h2 className="font-display text-xl text-portal">Filtros</h2>
+  <h2 className="font-display text-2xl text-portal drop-shadow-[0_0_10px_rgba(153,205,67,0.35)]">Filtros</h2>
 )
 
 export function FilterSidebar() {
@@ -33,7 +33,14 @@ export function FilterSidebar() {
     <>
       {/* Desktop: sidebar fixa lateral (esquerda) */}
       <aside className="hidden lg:block">
-        <div className="sticky top-6 rounded-2xl border border-border bg-card/50 p-5">
+        <div
+          className="sticky top-6 rounded-2xl border p-5"
+          style={{
+            backgroundColor: "rgba(0,194,217,0.7)",
+            borderColor: "rgba(0,194,217,0.8)",
+            boxShadow: "0 0 10px rgba(0,194,217,0.12)",
+          }}
+        >
           {PANEL_TITLE}
           <div className="mt-4">
             <FilterForm />
@@ -63,7 +70,10 @@ export function FilterSidebar() {
               role="dialog"
               aria-modal="true"
               aria-label="Filtros"
-              className="relative ml-auto flex h-full w-[85%] max-w-sm flex-col border-l border-border bg-card p-5 shadow-2xl"
+              className="relative ml-auto flex h-full w-[85%] max-w-sm flex-col p-5 shadow-2xl"
+              style={{
+                background: "linear-gradient(160deg, rgba(0,194,217,0.55), rgba(0,194,217,0.20))",
+              }}
             >
               <div className="flex items-center justify-between">
                 {PANEL_TITLE}
